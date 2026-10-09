@@ -1,0 +1,63 @@
+import React, { useState } from 'react';
+
+export default function Dashboard() {
+  const [balance, setBalance] = useState(2500);
+  const [referralsCount, setReferralsCount] = useState(5);
+  const userRefCode = "CASHIZI509";
+
+  const handleShare = () => {
+    const text = `Vini jwenn mwen sou Cash Izi! Fè lajan vit chak jou an Ayiti. Sèvi ak kòd referans mwen an: ${userRefCode}`;
+    if (navigator.share) {
+      navigator.share({ title: 'Cash Izi', text: text, url: window.location.href });
+    } else {
+      alert("Kòd referans ou a kopye: " + userRefCode);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-white p-4 max-w-md mx-auto flex flex-col justify-between">
+      {/* Tèt Paj la */}
+      <div>
+        <header className="flex justify-between items-center mb-6 pt-4">
+          <div>
+            <h2 className="text-xs text-slate-400">Byenveni,</h2>
+            <p className="text-lg font-bold text-emerald-400">+509 31XX XXXX</p>
+          </div>
+          <div className="w-10 h-10 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center text-emerald-400 font-bold">
+            CI
+          </div>
+        </header>
+
+        {/* Kat Balans Lajan an */}
+        <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl p-6 shadow-xl mb-6">
+          <p className="text-xs text-emerald-100 uppercase tracking-wider font-medium">Balans Kòb ou</p>
+          <h1 className="text-3xl font-black mt-1 mb-4">{balance} Goud</h1>
+          <div className="flex gap-2">
+            <button className="flex-1 bg-slate-950 text-emerald-400 text-sm font-bold py-2.5 rounded-xl shadow-md hover:bg-slate-900 transition-all">
+              Fè Retrè
+            </button>
+            <button onClick={handleShare} className="flex-1 bg-white text-slate-950 text-sm font-bold py-2.5 rounded-xl shadow-md hover:bg-emerald-50 transition-all">
+              Pataje Link
+            </button>
+          </div>
+        </div>
+
+        {/* Seksyon Kòd Referans */}
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-6">
+          <p className="text-xs text-slate-400 mb-2">Kòd Referans ou (Envite zanmi w)</p>
+          <div className="flex items-center justify-between bg-slate-950 border border-slate-800 rounded-xl px-4 py-3">
+            <span className="font-mono font-bold text-emerald-400 tracking-wider">{userRefCode}</span>
+            <span className="text-xs bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-lg font-medium">
+              {referralsCount} Moun Envite
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Anba Paj la */}
+      <footer className="text-center pb-4">
+        <p className="text-xs text-slate-500">Cash Izi © 2026 - Tout Dwa Rezève</p>
+      </footer>
+    </div>
+  );
+}
